@@ -1,0 +1,7 @@
+# file này giúp loại bỏ các file có trong file này khi được push lên github
+
+# không cần thiết đẩy node_modules lên vì file rất nặng, pull code về chỉ cần npm start là chạy được
+/node_modules
+
+# .env là file chứa các thông tin bảo mật nên không được đẩy lên
+.env
