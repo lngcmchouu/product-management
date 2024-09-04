@@ -38,7 +38,7 @@ module.exports.updateSlug = async() =>{
   try {
     
       // Tìm tất cả các bản ghi có slug là ""
-      const records = await Product.find({ slug: "" });
+      const records = await Product.find( { slug: { $exists: false } });
     
       // Cập nhật từng bản ghi
      // Sử dụng vòng lặp for để kiểm tra từng bản ghi
@@ -47,13 +47,12 @@ module.exports.updateSlug = async() =>{
       const newSlug = slugify(record.title, { lower: true, strict: true });
 
       }
-  
-
+      
     console.log('All old records updated with slug.');
   } catch (err) {
     console.error('Error updating records:', err);
   } finally {
-    
+   
   }
 }
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { default: slugify } = require("slugify");
 
 const productSchema = new mongoose.Schema(
   {
@@ -9,9 +10,9 @@ const productSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
+      trim: true,
       unique: true,
-      trim: true
-    },
+  },
     
     description: String,
     price: Number,
@@ -37,6 +38,19 @@ const productSchema = new mongoose.Schema(
   }
 );
 
+productSchema.pre('save', function (next) {
+  if (!this.isModified('title')) return next();
+  this.slug = slugify(this.title, { lower: true, trim: true });
+  next();
+});
+productSchema.pre('updateOne', async function (next) {
+  const update = this.getUpdate();
+  if (update.title) {
+    update.slug = slugify(update.title, { lower: true, trim: true });
+  }
+  next();
+
+});
 // mongoose.model() have three arguments: modelName, schema and collectionName. In case, dev dont write the third argument, Mongoose automatically looks for the plural, lowercased version of your model name.
 const Product = mongoose.model('Product', productSchema, "products");
 

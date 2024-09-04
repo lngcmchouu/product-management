@@ -50,7 +50,7 @@ module.exports.index = async(req, res) => {
 
   // model.find().limit().skip() là hàm tìm kiếm data theo điều kiện và từ data đó giới hạn n bản ghi và bỏ qua n bản ghi 
   const products = await Product.find(find)
-  .sort({ position:"asc"})
+  .sort({ position:"desc"})
   .limit(pagination.limitItems)
   .skip(pagination.skip);
 
@@ -252,13 +252,9 @@ module.exports.createItem = async(req, res) => {
   else{
     req.body.position = parseInt(req.body.position);
   }
+  
 
-  // lưu link ảnh vào database
-
-  if(req.file)
-  {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-  }
+  
   
   
   console.log(req.body);
@@ -270,6 +266,7 @@ module.exports.createItem = async(req, res) => {
     req.flash("success"," Tạo sản phẩm thành công")
   }catch(error){
     req.flash("error","Tạo sản phẩm không thành công");
+    console.log(error)
   }
   
   
@@ -308,22 +305,18 @@ module.exports.editPatch = async(req,res)=> {
   
   req.body.position = parseInt(req.body.position);
 
-  // lưu link ảnh vào database
-  if(req.file)
-  {
-    req.body.thumbnail = `/uploads/${req.file.filename}`;
-  }
+
 
   try{
     await Product.updateOne({
       _id: req.params.id
     },req.body);
-
     
 
     req.flash("success","Cập nhật thành công!");
   } catch(error){
     req.flash("error","Cập nhật thất bại!");
+    console.log(error);
   }
   res.redirect("back"); 
 }

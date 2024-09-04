@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const database = require("../../config/database")
 
 // sử dụng thư viện multer trong Node.js để cấu hình việc lưu trữ file khi người dùng tải file lên server (file upload).
 const multer = require('multer');
-const storageMulter = require("../../helpers/storageMulter");
-const upload = multer({ storage: storageMulter() })
-
+const upload = multer();
+const uploadCloud = require("../../middleware/admin/uploadCloud.middleware");
 
 const controller = require("../../controllers/admin/products-controller");
 
@@ -26,17 +26,21 @@ router.patch("/remove/:id", controller.restoreItem);
 
 router.get("/create", controller.createPage);
 
-router.post("/create", 
-  upload.single('thumbnail'), 
+router.post("/create",
+  upload.single('thumbnail'),
+  uploadCloud.upload,
+  
   validate.createItem,
+
   controller.createItem);
 
-router.get("/edit/:id",controller.edit);
+router.get("/edit/:id", controller.edit);
 
 router.patch("/edit/:id",
   upload.single('thumbnail'),
+  uploadCloud.upload,
   validate.createItem,
-  controller.editPatch  
+  controller.editPatch
 )
 
 
