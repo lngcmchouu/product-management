@@ -242,7 +242,8 @@ module.exports.createItem = async(req, res) => {
   // console.log(req.file);
  // transform type data
   req.body.price = parseInt(req.body.price);
-  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  if(req.body.discountPercentage != "0")
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
   req.body.stock = parseInt(req.body.stock);
   if(req.body.position == "")
   {
@@ -300,7 +301,13 @@ module.exports.edit = async(req, res) => {
 
 module.exports.editPatch = async(req,res)=> {
   req.body.price = parseInt(req.body.price);
+  console.log(req.body.discountPercentage)
+  console.log("0");
+  console.log(0);
+  
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  console.log(req.body)
+    
   req.body.stock = parseInt(req.body.stock);
   
   req.body.position = parseInt(req.body.position);

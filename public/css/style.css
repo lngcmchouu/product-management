@@ -57,6 +57,17 @@
   border-radius: 5px;
   /* border: 1px solid #ddd; */
   box-shadow: 5px 5px 5px 5px #ddd;
+  
+
+}
+
+.product-item .inner-image img{
+  
+  max-height: 260px;
+  /* max-width: 260; */
+  padding-left: 12px;
+  width: 100%;
+  object-fit: contain;
 
 }
 
@@ -74,7 +85,6 @@
   font-size: 18px;
   font-weight: 600;
   color:  rgb(249, 109, 193);
-  text-decoration: line-through;
 }
 
 .product-item .inner-content .inner-discount{
@@ -89,5 +99,8 @@
   right: 14px;
   top: -14px;
   border-radius: 7px;
+}
+.text-decoration-line-through{
+  text-decoration: line-through;
 }
 
