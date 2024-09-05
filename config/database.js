@@ -45,7 +45,7 @@ module.exports.updateSlug = async() =>{
       for (let record of records) {
       // Tạo slug mới từ title
       const newSlug = slugify(record.title, { lower: true, strict: true });
-
+        
       }
       
     console.log('All old records updated with slug.');

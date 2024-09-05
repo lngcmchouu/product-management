@@ -2,9 +2,9 @@ const cloudinary = require('cloudinary').v2
 const streamifier = require('streamifier')
 // connect account cloudinary to save img online
 cloudinary.config({ 
-  cloud_name: 'dtaj1q8fh', 
-  api_key: '343314778436613', 
-  api_secret: 'rvLJvdCFUIqpfz2o7PZc8imSOHE' // Click 'View API Keys' above to copy your API secret
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
 });
 
 module.exports.upload = (req, res, next) => {
