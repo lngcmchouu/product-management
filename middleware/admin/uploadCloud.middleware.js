@@ -1,3 +1,5 @@
+// lưu trữ ảnh trên cloudinary 
+
 const cloudinary = require('cloudinary').v2
 const streamifier = require('streamifier')
 // connect account cloudinary to save img online
@@ -29,6 +31,7 @@ module.exports.upload = (req, res, next) => {
     async function upload(req) {
       let result = await streamUpload(req);
       console.log(result.url);
+      // đợi update link ảnh từ cloud trả về
       req.body[req.file.fieldname] = result.url
       next();
     }

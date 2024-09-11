@@ -4,6 +4,7 @@ include ../../mixins/form-search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-changeMulti.pug
 include ../../mixins/alert.pug
+include ../../mixins/sort.pug
 
 block main 
 
@@ -22,6 +23,15 @@ block main
           +filter-status(filterStatus)
         .col-6 
           +form-search(keyword)
+  
+  .card.mb-3
+    .card-header Sắp xếp 
+      .row
+        .col-4 
+          +sort()
+          
+            
+          
 
   .card.mb-3 
     .card-header Danh sách 
@@ -105,7 +115,7 @@ block main
                     button-delete
                     data-id= item.id
                   ) Xóa
-
+  
   +pagination(pagination)
 
   //- khi chưa có API, tạo một form giả để thực hiện việc thay đổi trạng thái của sản phẩm

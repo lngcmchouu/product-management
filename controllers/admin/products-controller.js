@@ -48,9 +48,22 @@ module.exports.index = async(req, res) => {
   // end pagination
   
 
+  // Sort by selection form
+let sort = {};
+if(req.query.sortKey && req.query.sortValue){
+  console.log(req.query.sortKey)
+  sort[req.query.sortKey] = req.query.sortValue
+}else{
+  sort.position ="desc"
+}
+
+
+// End Sort
+
+
   // model.find().limit().skip() là hàm tìm kiếm data theo điều kiện và từ data đó giới hạn n bản ghi và bỏ qua n bản ghi 
   const products = await Product.find(find)
-  .sort({ position:"desc"})
+  .sort(sort)
   .limit(pagination.limitItems)
   .skip(pagination.skip);
 
@@ -74,6 +87,7 @@ module.exports.index = async(req, res) => {
     filterStatus: filterStatus,
     keyword: search.keyword,
     pagination: pagination
+    
   })
 };
 
@@ -148,8 +162,6 @@ module.exports.changeMulti = async(req, res) => {
     default:
       break
   }
-
-  
 
   res.redirect("back");
 
@@ -302,8 +314,6 @@ module.exports.edit = async(req, res) => {
 module.exports.editPatch = async(req,res)=> {
   req.body.price = parseInt(req.body.price);
   console.log(req.body.discountPercentage)
-  console.log("0");
-  console.log(0);
   
   req.body.discountPercentage = parseInt(req.body.discountPercentage);
   console.log(req.body)
@@ -352,5 +362,10 @@ module.exports.detail = async(req, res) => {
   
   
 }
+
+
+
+
+
 
 
