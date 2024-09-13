@@ -35,9 +35,9 @@ block main
   if(item.position)
     div(class="mb-4") Vị trí:
       b #{item.position}
-  
+  //- để hiển thị mã HTML thì dùng dấu "!"
   if(item.description)
-    div(class="mb-4") Mô tả:#{item.description}
+    div(class="mb-4") Mô tả:!{item.description}
 
   a(
     href=`${prefixAdmin}/products/edit/${item.id}`

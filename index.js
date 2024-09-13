@@ -1,6 +1,7 @@
 // use express
 const express = require('express');
 const app = express();
+const path = require("path");
 
 
 // slug use in URL to make them more readable, SEO-friendly, and distinguishable 
@@ -17,6 +18,10 @@ const flash = require('express-flash')
 app.use(cookieParser('FKAGAKKA'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
+
+// TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+// End TinyMCE
 
 // use method-override to use PATCH, DELETE, PUT method
 var methodOverride = require('method-override');

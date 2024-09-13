@@ -51,7 +51,7 @@ module.exports.index = async(req, res) => {
   // Sort by selection form
 let sort = {};
 if(req.query.sortKey && req.query.sortValue){
-  console.log(req.query.sortKey)
+  // console.log(req.query.sortKey)
   sort[req.query.sortKey] = req.query.sortValue
 }else{
   sort.position ="desc"

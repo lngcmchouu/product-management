@@ -219,7 +219,7 @@ if(uploadImg) {
 
 // Sort by selection form
 const sort = document.querySelector("[sort]");
-console.log(sort);
+// console.log(sort);
 if(sort){
   let url = new URL(window.location.href);
   const sortSelect = sort.querySelector("[sort-select]");
@@ -236,16 +236,16 @@ if(sort){
   // add selected for option
   const sortKey = url.searchParams.get("sortKey");
   const sortValue = url.searchParams.get("sortValue");
-  console.log(sortKey);
-  console.log(sortValue);
+  // console.log(sortKey);
+  // console.log(sortValue);
   if(sortKey && sortValue)
   {
     const stringSort = `${sortKey}-${sortValue}`;
     console.log(stringSort);
+    // tìm option có chứa chuỗi string gồm giá trị của sortKey và sortValue
     const optionSelected = sortSelect.querySelector(`option[value='${stringSort}']`);
     console.log(optionSelected);
     optionSelected.selected = true;
-
 
   }
   // end add
