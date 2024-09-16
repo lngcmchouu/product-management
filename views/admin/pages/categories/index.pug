@@ -1,0 +1,90 @@
+extends ../../layouts/default.pug
+
+
+
+block main 
+  h1 Danh mục sản phẩm 
+
+  .card.mb-3 
+    .card-header Danh sách 
+      .card-body 
+        .row.d-flex.align-items-center
+          .col-lg-6
+          .col-lg-6.d-flex.justify-content-between
+            .me-5
+              a(href=`${prefixAdmin}/categories/create`
+              class="btn btn-outline-success") +Thêm mới
+
+        table(
+                class="table table-hover table-sm"
+                checkbox-multi
+              )
+                thead 
+                  tr 
+                    th
+                      input(type="checkbox", name="checkAll")
+                    th STT 
+                    th Hình ảnh 
+                    th Tiêu đề
+                    th Vị trí
+                    th Trạng thái 
+                    th Hành động 
+                
+                each item, index in categories
+                  tbody 
+                    tr 
+                      td 
+                        input(type="checkbox" name="id"
+                        value = item.id)
+                      td #{index + 1}
+                      td 
+                        img(src = item.thumbnail, alt= item.title
+                        width ="100px"
+                        height ="auto") 
+                      td #{item.title}
+                      td 
+                        input(
+                          type="number"
+                          value= item.position 
+                          style= "width: 60px"
+                          min= "1"
+                          name = "position"      
+                        )
+                      td 
+                        //- a(href ="javascipt:;") là một pseudo-protocol (giả giao thức) trong HTML, cho phép chạy chạy một đoạn mã JavaScript khi liên kết được nhấp vào. Tuy nhiên, trong case này chỉ có dấu ";" sau nên liên kết này sẽ không dẫn đến bất kỳ URL nào và không thực hiện bất kỳ hành động nào khi được click vào. hành động sẽ được xử lí bằng code khác
+                        if(item.status == "active")
+                          a(href="javascript:;"
+                          data-status ="In Stock"
+                          button-changeStatus =""
+                          data-id = item.id
+                          class="badge badge-success") Hoạt động
+                        else 
+                          a(href="javascript:;"
+                          data-status ="Out Stock"
+                          button-changeStatus =""
+                          data-id = item.id 
+                          class="badge badge-danger") Dừng hoạt động
+                          
+                      td 
+                        a(
+                          href=`${prefixAdmin}/categories/detail/${item.id}`
+                          class="btn btn-secondary btn-sm"
+                        ) Chi tiết
+                        a(
+                          href=`${prefixAdmin}/categories/edit/${item.id}`
+                          class="btn btn-warning btn-sm"
+                        ) Sửa
+                        button(
+                          class="btn btn-danger btn-sm ml-1"
+                          button-delete
+                          data-id= item.id
+                        ) Xóa
+
+
+    
+  
+
+
+
+  script(src="/admin/js/product.js") 
+  
