@@ -1,6 +1,7 @@
 const { parse } = require("dotenv")
 const Category = require("../../models/category-model.js")
 const system = require("../../config/system.js")
+const createTreeHelper = require("../../helpers/createTree.js")
 
 
 // [GET] /admin/categories
@@ -8,19 +9,35 @@ module.exports.index = async(req,res) => {
   let find = {
     deleted: false
   };
-  const categories = await Category.find(find);
+  
+  
+
+  const category = await Category.find(find);
+  // console.log(category)
+  const newRecord = createTreeHelper.tree(category);
+  // console.log(newRecord)
 
 
   res.render("admin/pages/categories/index",{
     pageTitle: "Danh mục sản phẩm",
-    categories: categories
+    records: newRecord
   })
 }
 
 // [GET] /admin/categories/create
 module.exports.create = async(req,res) => {
+  let find = {
+    deleted: false
+  };
+
+
+  const category = await Category.find(find);
+  // console.log(category)
+  const newRecord = createTreeHelper.tree(category);
+  // console.log(newRecord);
   res.render("admin/pages/categories/create",{
     pageTitle: "Tạo danh mục sản phẩm",
+    records: newRecord
   })
 }
 
